@@ -1,3 +1,5 @@
+"use server";
+
 import { IStarWars } from "@/types/star-wars";
 
 export async function getStarWars(page: number = 1): Promise<IStarWars[]> {
@@ -6,7 +8,7 @@ export async function getStarWars(page: number = 1): Promise<IStarWars[]> {
   );
 
   if (!response.ok) {
-    throw new Error("Something went wrong!");
+    throw new Error("Failed to fetch data!");
   }
 
   const data = await response.json();
