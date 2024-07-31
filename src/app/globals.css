@@ -8,9 +8,6 @@
 
 body {
   margin: 0;
-  background: radial-gradient(#282c34, #282c34);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  background: radial-gradient(#043eb1, #07142c);
+  text-align: center;
 }
