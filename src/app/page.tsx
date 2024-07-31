@@ -1,22 +1,11 @@
-import getStarWars from "@/api/getStarWars";
+import { getStarWars } from "@/api/getStarWars";
 
-interface IStarWars {
-  id: string;
-  name: string;
-}
+import CardList from "@/components/card-list";
 
 export default async function Home() {
-  const results = (await getStarWars()) as IStarWars[];
+  const allStarWars = await getStarWars();
 
-  console.log("results", results);
+  console.log(allStarWars);
 
-  return (
-    <ul>
-      {results.map(({ id, name }) => (
-        <li key={id}>
-          <p>{name}</p>
-        </li>
-      ))}
-    </ul>
-  );
+  return <CardList card={allStarWars} />;
 }
