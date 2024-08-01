@@ -3,4 +3,5 @@ export interface IStarships {
   name: string;
   model: string;
   films: number[];
+  pilots: number[];
 }
