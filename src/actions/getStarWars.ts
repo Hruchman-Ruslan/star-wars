@@ -1,8 +1,15 @@
 "use server";
 
-import { IStarWars } from "@/types/star-wars";
+interface IStarWars {
+  results: {
+    id: string;
+    name: string;
+    films: number[];
+    starships: number[];
+  }[];
+}
 
-export async function getStarWars(page: number = 1): Promise<IStarWars[]> {
+export async function getStarWars(page: number = 1) {
   const response = await fetch(
     `https://sw-api.starnavi.io/people/?page=${page}`
   );
@@ -11,7 +18,12 @@ export async function getStarWars(page: number = 1): Promise<IStarWars[]> {
     throw new Error("Failed to fetch data!");
   }
 
-  const data = await response.json();
+  const data: IStarWars = await response.json();
 
-  return data.results;
+  return data.results.map(({ id, name, films, starships }) => ({
+    id,
+    name,
+    films,
+    starships,
+  }));
 }
