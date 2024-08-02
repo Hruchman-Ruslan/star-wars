@@ -8,7 +8,7 @@ export interface IStarWarsById {
 }
 
 export async function getStarWarsById(id: number) {
-  const response = await fetch(`https://sw-api.starnavi.io/people/${id}/`);
+  const response = await fetch(`https://sw-api.starnavi.io/people/${id}`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch data!");

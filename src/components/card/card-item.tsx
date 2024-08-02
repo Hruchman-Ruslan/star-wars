@@ -7,12 +7,17 @@ export interface CardItemProps {
 
 export default function CardItem({ id, name }: CardItemProps) {
   return (
-    <li key={id} className="w-full max-w-sm mx-auto">
+    <li
+      key={id}
+      className="w-full max-w-sm mx-auto bg-gray-900 text-white rounded-lg shadow-lg border border-gray-700 p-4 transition-transform transform hover:scale-105"
+    >
       <Link
         href={`/${id}`}
-        className=" block bg-transparent border-2 border-blue-500 text-gray-900 p-10 rounded-lg shadow-md cursor-pointer"
+        className="block cursor-pointer rounded-lg p-3 transition-all hover:bg-yellow-600"
       >
-        <p className="text-xl font-semibold truncate text-teal-500">{name}</p>
+        <p className="font-bold text-xl text-yellow-400 hover:text-gray-900 transition-colors duration-300 shadow-md">
+          {name}
+        </p>
       </Link>
     </li>
   );

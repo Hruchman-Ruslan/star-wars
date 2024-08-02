@@ -11,3 +11,22 @@ body {
   background: radial-gradient(#043eb1, #07142c);
   text-align: center;
 }
+
+::-webkit-scrollbar {
+  width: 12px;
+  background: #07142c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #043eb1;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00baff;
+}
+
+.custom-text-stroke {
+  -webkit-text-stroke: 3px yellow;
+  text-shadow: 1px 1px 0 #000;
+}

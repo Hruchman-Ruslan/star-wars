@@ -11,7 +11,7 @@ interface IStarWarsStarship {
 }
 
 export async function getStarWarsStarship() {
-  const response = await fetch(`https://sw-api.starnavi.io/starships/`);
+  const response = await fetch(`https://sw-api.starnavi.io/starships`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch data!");
