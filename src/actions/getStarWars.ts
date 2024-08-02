@@ -15,6 +15,9 @@ export async function getStarWars(page: number = 1) {
   );
 
   if (!response.ok) {
+    if (response.status === 404) {
+      return [];
+    }
     throw new Error("Failed to fetch data!");
   }
 
