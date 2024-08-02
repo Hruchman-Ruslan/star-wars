@@ -10,7 +10,7 @@ interface IStarWarsFilms {
 }
 
 export async function getStarWarsFilms() {
-  const response = await fetch(`https://sw-api.starnavi.io/films/`);
+  const response = await fetch(`https://sw-api.starnavi.io/films`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch data!");
