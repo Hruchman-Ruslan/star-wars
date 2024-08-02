@@ -3,13 +3,23 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="flex items-center justify-center min-h-screen">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 w-full md:w-3/4 lg:w-1/2">
-        <h1 className="font-bold text-black text-3xl md:text-4xl lg:text-5xl animate-pulse custom-text-stroke">
-          Star Wars
-        </h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 w-full md:w-3/4 lg:w-1/2">
+        <div className="flex items-center justify-center">
+          <h1 className="font-bold text-black text-3xl md:text-4xl lg:text-5xl animate-pulse custom-text-stroke">
+            Star Wars
+          </h1>
+        </div>
 
         <div className="flex items-center justify-center">
-          <p className="text-lg md:text-xl font-semibold text-white">Demo</p>
+          <div className="relative w-96 h-52 border-4 border-yellow-500 rounded-lg overflow-hidden shadow-lg">
+            <iframe
+              className="w-full h-full"
+              src="https://www.youtube.com/embed/Jtxh2qmd-WY"
+              title="Star Wars Video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
         </div>
 
         <p className="font-semibold text-base md:text-lg text-white">
