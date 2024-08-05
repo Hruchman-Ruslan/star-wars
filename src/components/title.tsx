@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+// Title component with navigation to the demo page
 export default function Title() {
   return (
     <Link href=".">

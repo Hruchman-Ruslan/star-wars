@@ -1,4 +1,8 @@
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
+
+import { filterHeroFilms } from "@/utils/filmUtils";
+import { filterHeroStarships } from "@/utils/starshipUtils";
 
 import { getStarWarsById } from "@/actions/getStarWarsById";
 import { getStarWarsFilms } from "@/actions/getStarWarsFilms";
@@ -6,28 +10,48 @@ import { getStarWarsStarship } from "@/actions/getStarWarsStarship";
 
 import FlowComponent from "@/components/detail-card/flow-component";
 
-export interface HeroPageProps {
+export async function generateMetadata({
+  params,
+}: {
   params: { id: string };
+}): Promise<Metadata> {
+  const hero = await getStarWarsById(parseInt(params.id)); // Await the hero data
+  const films = await getStarWarsFilms(); // Await films data
+
+  // Find the films in which the hero appears
+  const heroFilms = filterHeroFilms(films, hero.id);
+
+  return {
+    title: hero.name, // Use hero name as title
+    description: `This hero appears in ${heroFilms.length} films.`, // Page description
+  };
 }
 
-export default async function HeroPage({ params }: HeroPageProps) {
-  const heroId = parseInt(params.id);
-  const hero = await getStarWarsById(heroId);
-  const films = await getStarWarsFilms();
-  const starships = await getStarWarsStarship();
+export interface HeroPageProps {
+  params: { id: string }; // Parameters containing the hero ID
+}
 
+// Component for rendering the detailed view of a Star Wars hero
+export default async function HeroPage({ params }: HeroPageProps) {
+  const heroId = parseInt(params.id); // Convert ID from string to number
+  const [hero, films, starships] = await Promise.all([
+    getStarWarsById(heroId),
+    getStarWarsFilms(),
+    getStarWarsStarship(),
+  ]);
+
+  // If hero data is not found, return a 404 page
   if (!hero) {
     notFound();
   }
 
-  const heroFilms = films.filter(({ characters }) =>
-    characters.includes(heroId)
-  );
+  // Filter films where the hero appears
+  const heroFilms = filterHeroFilms(films, heroId);
 
-  const heroStarships = starships.filter((starship) =>
-    heroFilms.some(({ starships }) => starships.includes(starship.id))
-  );
+  // Filter starships that are in the films where the hero appears
+  const heroStarships = filterHeroStarships(starships, heroFilms);
 
+  // Create initial nodes for the flow diagram
   const initialNodes = [
     {
       id: `hero-${heroId}`,
@@ -49,6 +73,7 @@ export default async function HeroPage({ params }: HeroPageProps) {
     })),
   ];
 
+  // Create initial edges for the flow diagram
   const initialEdges = [
     ...heroFilms.flatMap((film) =>
       film.starships.map((starshipId) => ({
@@ -67,6 +92,7 @@ export default async function HeroPage({ params }: HeroPageProps) {
   ];
 
   return (
+    // Pass initialNodes and initialEdges to the FlowComponent as the starting state
     <FlowComponent initialNodes={initialNodes} initialEdges={initialEdges} />
   );
 }
