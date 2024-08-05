@@ -17,7 +17,7 @@ export default function Home() {
             <div className="relative w-96 h-52 border-4 border-yellow-500 rounded-lg overflow-hidden shadow-lg">
               <iframe
                 className="w-full h-full"
-                src="https://www.youtube.com/embed/Jtxh2qmd-WY"
+                src="https://www.youtube.com/embed/XdIL625mrjo"
                 title="Star Wars Video"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
